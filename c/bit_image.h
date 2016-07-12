@@ -76,7 +76,7 @@ static uint8_t *bit_image_write(
 		void *pixel = source + stride * i;
 		
 		if(memcmp(&color, pixel, stride) == 0) {
-			result[byte] |= 1 << bit;
+			result[byte] |= 1 << (i - (byte << 3));
 		}
 	}
 	
