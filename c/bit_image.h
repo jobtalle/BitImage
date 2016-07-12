@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -68,12 +69,12 @@ static uint8_t *bit_image_write(
 	uint8_t *result = NULL;
 	
 	stride = bit_image_stride(format);
-	result = calloc(pixel_count >> 3, 1);
+	result = (uint8_t*)calloc(pixel_count >> 3, 1);
 	
 	for(i = 0; i < pixel_count; ++i) {
 		uint8_t byte = i >> 3;
 		uint8_t bit = i - (byte << 3);
-		void *pixel = source + stride * i;
+		void *pixel = (void*)(source + stride * i);
 		
 		if(memcmp(&color, pixel, stride) == 0) {
 			result[byte] |= 1 << (i - (byte << 3));
@@ -96,7 +97,7 @@ static uint8_t *bit_image_read(
 	uint8_t *result = NULL;
 	
 	stride = bit_image_stride(format);
-	result = malloc(pixel_count * stride);
+	result = (uint8_t*)malloc(pixel_count * stride);
 	
 	for(i = 0; i < pixel_count; ++i) {
 		uint8_t byte = i >> 3;
