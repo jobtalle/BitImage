@@ -1,2 +1,2 @@
-# 1BitImage
+# BitImage
 A 1 bit image format
