@@ -72,7 +72,7 @@ static uint8_t *bit_image_write(
 	result = (uint8_t*)calloc(pixel_count >> 3, 1);
 	
 	for(i = 0; i < pixel_count; ++i) {
-		uint8_t byte = i >> 3;
+		uint32_t byte = i >> 3;
 		void *pixel = (void*)(source + stride * i);
 		
 		if(memcmp(&color, pixel, stride) == 0) {
@@ -99,7 +99,7 @@ static uint8_t *bit_image_read(
 	result = (uint8_t*)malloc(pixel_count * stride);
 	
 	for(i = 0; i < pixel_count; ++i) {
-		uint8_t byte = i >> 3;
+		uint32_t byte = i >> 3;
 		uint8_t bit = i - (byte << 3);
 		void *pixel = result + stride * i;
 		
